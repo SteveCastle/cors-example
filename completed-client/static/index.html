@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // A script tag that sends a fetch request to localhost:8080/cors-example
+      // The response is a JSON object in the form of {message: "Hello World"}
+      // Append the message as an h1 tag to the body of the page
+      // this should run when the document is ready
+
+      function appendMessage(message) {
+        const h1 = document.createElement("h1");
+        h1.innerText = message;
+        document.body.appendChild(h1);
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        // Fetching from another domain with a Get Request
+        fetch("http://localhost:8080/api", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => appendMessage(data.message));
+      });
+      // Fetching from another domain with a Post Request
+      //     fetch("http://localhost:8080/api", {
+      //       method: "POST",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //       body: JSON.stringify({ message: "Hello World" }),
+      //     })
+      //       .then((response) => response.json())
+      //       .then((data) => appendMessage(data.message));
+      //   });
+    </script>
+  </body>
+</html>
